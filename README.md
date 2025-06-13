@@ -1,5 +1,8 @@
 # Hola
 
+
+
+Ignorando el readme de angular si lo van a copiar cambien nombre de variables porfa 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
 
 ## Development server
