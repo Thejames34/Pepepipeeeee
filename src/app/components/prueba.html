@@ -1,0 +1,28 @@
+<div>
+
+    <h1>Hola</h1>
+    <p style="color: rgb(182, 127, 255);">{{hola}}</p>
+    
+     <input type="text" [(ngModel)]="hola" >
+
+    <button (click)="cambiartexto()">
+        Cambiar
+        
+    </button>
+
+   <div>
+    <div *ngFor="let palabra of array" 
+        style="background-color: skyblue; margin: 3px;">
+        {{palabra}}
+
+    
+
+    </div>
+
+    <div *ngIf="img">
+        <img [ngClass]="{'img':status=='Fase1','img1':status=='Fase2','img2':status=='Fase3','img3':status=='Fase4'}
+        " src="https://ih1.redbubble.net/image.2481861431.2898/flat,750x,075,f-pad,750x1000,f8f8f8.webp" alt="">
+    </div>
+
+    </div>
+</div>

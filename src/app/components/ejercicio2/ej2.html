@@ -1,0 +1,120 @@
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#datos">
+    Abrir Formulario
+</button>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Boton</th>
+            <th>Titulo</th>
+            <th>Horario</th>
+            <th>Personas</th>
+            <th>Sala</th>
+            <th>Clasificacion</th>
+            <th>Duracion</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pelicula of listadopeliculas">
+            <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrireditarPelicula(pelicula)">Editar</button></td>
+            <td>{{ pelicula.titulo }}</td>
+            <td>{{ pelicula.horario }}</td>
+            <td>{{ pelicula.personas }}</td>
+            <td>{{ pelicula.sala }}</td>
+            <td>{{ pelicula.clasificacion }}</td>
+            <td>{{ pelicula.duracion/60}} horas</td>
+            <td>{{ pelicula.descripcion }}</td>
+            <td><button class="btn btn-danger" (click)="eliminarPelicula(pelicula)">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="datos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Formulario para seleccion de pelicula</h1>
+                <button class="btn-close" id="cerrarModal" data-bs-dismiss="modal">
+
+                </button>
+            </div>
+            <div class="modal-body row">
+                <label class="col-form-label col-2">
+                    Pelicula
+                </label>
+                <div class="col-10">
+                    <input type="text" class="form-control" placeholder="Titanic" [(ngModel)]="peliculaModal.titulo">
+                </div>
+                <label class="col-form-label col-2">
+                    horario
+                </label>
+                <div class="col-2">
+                    <input type="number" class="form-control" placeholder="02:00" [(ngModel)]="peliculaModal.horario">
+                </div>
+                <label class="col-form-label col-2">
+                    Cantidad de Personas
+                </label>
+                <div class="col-2">
+                    <input type="number" class="form-control" placeholder="4" [(ngModel)]="peliculaModal.personas">
+                </div>
+                <label class="col-form-label col-2">
+                    Sala
+                </label>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="peliculaModal.sala">
+                        <option value="1">Sala 1</option>
+                        <option value="2">Sala 2</option>
+                        <option value="3">Sala 3</option>
+                        <option value="4">Sala 4</option>
+                        <option value="5">Sala 5</option>
+                    </select>
+                </div>
+                <label class="col-form-label col-2">
+                    Clasificacion
+                </label>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example"
+                        [(ngModel)]="peliculaModal.clasificacion">
+                        <option value="AA">AA</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="B15">B15</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+                <label class="col-form-label col-2">
+                    Duracion
+                </label>
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="120" aria-label="Recipient’s username"
+                            aria-describedby="basic-addon2" [(ngModel)]="peliculaModal.duracion">
+                        <span class="input-group-text" id="basic-addon2">Minutos</span>
+                    </div>
+                </div>
+                <label class="col-form-label col-5">
+                    Descripcion
+                </label>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" [(ngModel)]="peliculaModal.descripcion"></textarea>
+                    <label for="floatingTextarea">Escribe una descripcion aqui</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!peliculaModal.edicion" class="btn btn-success" (click)="registrarPelicula()">
+                    Registrar Pelicula
+                </button>
+                <button *ngIf="peliculaModal.edicion" class="btn btn-warning" (click)="editarPelicula()"> 
+                    Guardar Cambios de Pelicula
+                </button>
+           
+            </div>
+        </div>
+
+    </div>
+
+</div>
