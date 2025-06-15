@@ -1,32 +1,50 @@
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#datos">
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrirFormulario()">
     Abrir Formulario
 </button>
 
+<!-- Debug info -->
+<div class="mb-3">
+    <p><strong>Estado:</strong> Hay {{ listadopeliculas.length }} películas cargadas</p>
+</div>
 
-<table class="table">
-    <thead>
+<!-- Tabla restaurada con colores usando clases de Bootstrap -->
+<table class="table table-bordered">
+    <thead class="table-dark">
         <tr>
-            <th>Boton</th>
             <th>Titulo</th>
             <th>Horario</th>
+            <th>Estatus</th>
             <th>Personas</th>
             <th>Sala</th>
             <th>Clasificacion</th>
             <th>Duracion</th>
             <th>Descripcion</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let pelicula of listadopeliculas">
-            <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrireditarPelicula(pelicula)">Editar</button></td>
+        <tr *ngFor="let pelicula of listadopeliculas; let i = index"
+            [ngClass]="{
+                'table-success': pelicula.estatus === 'En cartelera',
+                'table-danger': pelicula.estatus === 'No disponible'
+            }"
+            [attr.data-estatus]="pelicula.estatus">
             <td>{{ pelicula.titulo }}</td>
             <td>{{ pelicula.horario }}</td>
+            <td><strong>{{ pelicula.estatus }}</strong></td> 
             <td>{{ pelicula.personas }}</td>
             <td>{{ pelicula.sala }}</td>
             <td>{{ pelicula.clasificacion }}</td>
             <td>{{ pelicula.duracion/60}} horas</td>
             <td>{{ pelicula.descripcion }}</td>
-            <td><button class="btn btn-danger" (click)="eliminarPelicula(pelicula)">Eliminar</button></td>
+            <td>
+                <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrireditarPelicula(pelicula)">
+                    <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="eliminarPelicula(pelicula)">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -37,32 +55,31 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1>Formulario para seleccion de pelicula</h1>
-                <button class="btn-close" id="cerrarModal" data-bs-dismiss="modal">
-
-                </button>
+                <button class="btn-close" id="cerrarModal" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body row">
-                <label class="col-form-label col-2">
-                    Pelicula
-                </label>
+                <label class="col-form-label col-2">Pelicula</label>
                 <div class="col-10">
                     <input type="text" class="form-control" placeholder="Titanic" [(ngModel)]="peliculaModal.titulo">
                 </div>
-                <label class="col-form-label col-2">
-                    horario
-                </label>
+                <label class="col-form-label col-2">Horario</label>
                 <div class="col-2">
                     <input type="number" class="form-control" placeholder="02:00" [(ngModel)]="peliculaModal.horario">
                 </div>
-                <label class="col-form-label col-2">
-                    Cantidad de Personas
-                </label>
+                <label class="col-form-label col-2">Estatus</label>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="peliculaModal.estatus" [disabled]="!peliculaModal.edicion">
+                        <option value="Pendiente Revision" selected>Pendiente Revision</option>
+                        <option value="En cartelera">En cartelera</option>
+                        <option value="Proximamente">Proximamente</option>
+                        <option value="No disponible">No disponible</option>
+                    </select>
+                </div>
+                <label class="col-form-label col-2">Cantidad de Personas</label>
                 <div class="col-2">
                     <input type="number" class="form-control" placeholder="4" [(ngModel)]="peliculaModal.personas">
                 </div>
-                <label class="col-form-label col-2">
-                    Sala
-                </label>
+                <label class="col-form-label col-2">Sala</label>
                 <div class="col-2">
                     <select class="form-select" aria-label="Default select example" [(ngModel)]="peliculaModal.sala">
                         <option value="1">Sala 1</option>
@@ -72,12 +89,9 @@
                         <option value="5">Sala 5</option>
                     </select>
                 </div>
-                <label class="col-form-label col-2">
-                    Clasificacion
-                </label>
+                <label class="col-form-label col-2">Clasificacion</label>
                 <div class="col-2">
-                    <select class="form-select" aria-label="Default select example"
-                        [(ngModel)]="peliculaModal.clasificacion">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="peliculaModal.clasificacion">
                         <option value="AA">AA</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
@@ -85,24 +99,18 @@
                         <option value="C">C</option>
                     </select>
                 </div>
-                <label class="col-form-label col-2">
-                    Duracion
-                </label>
+                <label class="col-form-label col-2">Duracion</label>
                 <div class="col-2">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="120" aria-label="Recipient’s username"
-                            aria-describedby="basic-addon2" [(ngModel)]="peliculaModal.duracion">
+                        <input type="number" class="form-control" placeholder="120" [(ngModel)]="peliculaModal.duracion">
                         <span class="input-group-text" id="basic-addon2">Minutos</span>
                     </div>
                 </div>
-                <label class="col-form-label col-5">
-                    Descripcion
-                </label>
+                <label class="col-form-label col-5">Descripcion</label>
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" [(ngModel)]="peliculaModal.descripcion"></textarea>
                     <label for="floatingTextarea">Escribe una descripcion aqui</label>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <button *ngIf="!peliculaModal.edicion" class="btn btn-success" (click)="registrarPelicula()">
@@ -111,10 +119,7 @@
                 <button *ngIf="peliculaModal.edicion" class="btn btn-warning" (click)="editarPelicula()"> 
                     Guardar Cambios de Pelicula
                 </button>
-           
             </div>
         </div>
-
     </div>
-
 </div>

@@ -1,0 +1,147 @@
+/* Mejora de contraste para colores de Bootstrap */
+.table-success {
+    background-color: green !important;
+    color: black !important;
+}
+
+.table-success td {
+    color: black !important;
+}
+
+.table-danger {
+    background-color: red !important;
+    color: black !important;
+}
+
+.table-danger td {
+    color: black !important;
+}
+
+
+
+/* Clases para colorear las filas según el estatus */
+.aprobada {
+    background-color: green !important; /* verde, mismo color que bg-success de Bootstrap */
+    color: rgb(0, 0, 0) !important;
+}
+
+.rechazada {
+    background-color: #dc3545 !important; /* rojo, mismo color que bg-danger de Bootstrap */
+    color: rgb(0, 0, 0) !important;
+}
+
+/* Estilos más específicos para sobreescribir Bootstrap */
+table.table tbody tr.aprobada {
+    background-color: green !important;
+    color: black !important;
+}
+
+table.table tbody tr.rechazada {
+    background-color: #dc3545 !important;
+    color: black !important;
+}
+
+/* Asegurarse que los textos dentro de las celdas también tengan el color correcto */
+table.table tbody tr.aprobada td {
+    color: black !important;
+}
+
+table.table tbody tr.rechazada td {
+    color: black !important;
+}
+
+/* Opcional: estilo para los enlaces o botones dentro de las filas coloreadas */
+table.table tbody tr.aprobada a, 
+table.table tbody tr.aprobada button,
+table.table tbody tr.rechazada a,
+table.table tbody tr.rechazada button {
+    color: black !important;
+}
+
+/* Estilos muy específicos con !important */
+.table tr[style*="background-color"] {
+    background-color: inherit !important;
+}
+
+/* Aplicar estos estilos después de que Angular haya procesado el DOM */
+tr.fila-en-cartelera {
+    background-color: green !important;
+    color: black !important;
+}
+
+tr.fila-no-disponible {
+    background-color: #dc3545 !important;
+    color: black !important;
+}
+
+/* Clases para colorear las filas según el estatus */
+.fila-en-cartelera {
+    background-color: green !important; /* verde */
+    color: black !important;
+}
+
+.fila-en-cartelera td {
+    color: black !important;
+}
+
+.fila-no-disponible {
+    background-color: #dc3545 !important; /* rojo */
+    color: black !important;
+}
+
+.fila-no-disponible td {
+    color: black !important;
+}
+
+/* Asegurar que los botones dentro de las filas coloreadas mantengan sus estilos */
+.fila-en-cartelera .btn,
+.fila-no-disponible .btn {
+    color: black;
+}
+
+/* Estilos para filas según estado */
+tr.fila-en-cartelera {
+    background-color: green !important;
+    color: black !important;
+}
+
+tr.fila-no-disponible {
+    background-color: #dc3545 !important;
+    color: black !important;
+}
+
+/* Asegurar que todas las celdas dentro de las filas coloreadas hereden el color */
+tr.fila-en-cartelera td,
+tr.fila-no-disponible td {
+    color: black !important;
+}
+
+/* Evitar que los botones hereden el color de fondo */
+tr.fila-en-cartelera button,
+tr.fila-no-disponible button {
+    color: black;
+}
+
+/* Estilos básicos para las filas */
+tr.verde {
+    background-color: green !important;
+    color: black !important;
+}
+
+tr.verde td {
+    color: black !important;
+}
+
+tr.rojo {
+    background-color: #dc3545 !important;
+    color: black !important;
+}
+
+tr.rojo td {
+    color: black !important;
+}
+
+/* Para debug - bordes para visualizar la estructura */
+table, th, td {
+    border: 1px solid #ddd;
+}

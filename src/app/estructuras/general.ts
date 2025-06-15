@@ -9,6 +9,7 @@ export class pelicula {
     duracion:number = 0;
     descripcion:string = '';
     edicion:boolean = false; //select de al menos 5
+    estatus: string = 'Pendiente Revision'; //select de al menos 5
 
     constructor(){
 
@@ -25,8 +26,8 @@ export class pelicula {
         this.clasificacion = data.clasificacion;
         this.duracion = data.duracion;
         this.descripcion = data.descripcion;
-      /*   this.edicion = data.edicion || false;  */
-       /*     >:)   .....................................................................loading */  
+        this.edicion = data.edicion || false;
+        this.estatus = data.estatus || 'Pendiente Revision';
     }
 
 }
