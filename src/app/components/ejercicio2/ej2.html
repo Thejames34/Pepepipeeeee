@@ -2,10 +2,57 @@
     Abrir Formulario
 </button>
 
+<!-- Sección de filtros mejorada -->
+<div class="card mb-4 mt-3 border-primary shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-funnel-fill me-2"></i> Filtros de Películas
+    </div>
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <!-- Caja de Búsqueda -->
+            <div class="col-md-5">
+                <label class="form-label"><i class="bi bi-search"></i> Buscar por título</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ej: Titanic, Avatar..." [(ngModel)]="tituloBusqueda">
+                    <button class="btn btn-primary" type="button" (click)="buscarPeliculasPorTitulo(tituloBusqueda)">
+                        <i class="bi bi-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Select de filtros -->
+            <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-filter" ></i> Filtrar por estatus</label>
+                <div class="input-group">
+                    <select class="form-select" [(ngModel)]="filtradoEstatus">
+                        <option selected value="">Todos los estados</option>
+                        <option value="En cartelera">En cartelera</option>
+                        <option value="Proximamente">Próximamente</option>
+                        <option value="No disponible">No disponible</option>
+                        <option value="Pendiente Revision">Pendiente de revisión</option>
+                    </select>
+                    <button class="btn btn-success" type="button" (click)="filtrarPorEstatus()">
+                        <i class="bi bi-funnel"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Botón para quitar Filtros -->
+            <div class="col-md-3">
+                <button class="btn btn-outline-secondary w-100" type="button" (click)="resetFiltro()">
+                    <i class="bi bi-x-circle"></i> Limpiar Filtros
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Debug info -->
 <div class="mb-3">
     <p><strong>Estado:</strong> Hay {{ listadopeliculas.length }} películas cargadas</p>
 </div>
+
+
 
 <!-- Tabla restaurada con colores usando clases de Bootstrap -->
 <table class="table table-bordered">
@@ -25,8 +72,8 @@
     <tbody>
         <tr *ngFor="let pelicula of listadopeliculas; let i = index"
             [ngClass]="{
-                'table-success': pelicula.estatus === 'En cartelera',
-                'table-danger': pelicula.estatus === 'No disponible'
+                'aprobada': pelicula.estatus === 'En cartelera',
+                'desaprobada': pelicula.estatus === 'No disponible'
             }"
             [attr.data-estatus]="pelicula.estatus">
             <td>{{ pelicula.titulo }}</td>
@@ -48,6 +95,9 @@
         </tr>
     </tbody>
 </table>
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="datos" tabindex="-1" aria-hidden="true">

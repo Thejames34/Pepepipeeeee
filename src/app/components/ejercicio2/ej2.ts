@@ -17,6 +17,9 @@ export class EjDosComponent {
 
     coleccionPeliculas = collection(this.firestore, 'Pelicula');
 
+    filtradoEstatus: string = ''; // Variable para filtrar por estatus
+
+    tituloBusqueda: string = ''; // Variable para buscar por título
 
 
     constructor(private firestore: Firestore, private cdr: ChangeDetectorRef){
@@ -141,7 +144,102 @@ export class EjDosComponent {
             }
         });
     }
+
+
+    // Función para filtrar películas por estatus
+    filtrarPorEstatus() {
+
+        const consulta = query(
+            this.coleccionPeliculas,
+            where('estatus', '==', this.filtradoEstatus)
+        );
+        collectionData(consulta, {idField: 'ID_PEL'}).subscribe((listadoPelicula) => {
+            this.listadopeliculas = [];
+            listadoPelicula.forEach((peli) => {
+                const peliculaObj = new pelicula();
+                peliculaObj.llenado(peli);
+                this.listadopeliculas.push(peliculaObj);
+            });
+            this.cdr.detectChanges();
+        }, error => {
+            console.error("Error al filtrar películas:", error);
+        });
+
+
+
+ /*        if (this.filtradoEstatus) {
+            this.listadopeliculas = this.listadopeliculas.filter(pelicula => pelicula.estatus === this.filtradoEstatus);
+        } else {
+            // Si no hay filtro, recargar todas las películas
+            const consulta = query(this.coleccionPeliculas);
+            collectionData(consulta, {idField: 'ID_PEL'}).subscribe((listadoPelicula) => {
+                this.listadopeliculas = [];
+                listadoPelicula.forEach((peli) => {
+                    const peliculaObj = new pelicula();
+                    peliculaObj.llenado(peli);
+                    this.listadopeliculas.push(peliculaObj);
+                });
+                this.cdr.detectChanges();
+            });
+        } */
+    }
+    resetFiltro() {
+        this.filtradoEstatus = ''; // Reiniciar el filtro
+        // Recargar todas las películas
+        const consulta = query(this.coleccionPeliculas);
+        collectionData(consulta, {idField: 'ID_PEL'}).subscribe((listadoPelicula) => {
+            this.listadopeliculas = [];
+            listadoPelicula.forEach((peli) => {
+                const peliculaObj = new pelicula();
+                peliculaObj.llenado(peli);
+                this.listadopeliculas.push(peliculaObj);
+            });
+            this.cdr.detectChanges();
+        });
+    }
+    getEstatusOptions(): string[] {
+        return [
+            'Pendiente Revision',
+            'En cartelera',
+            'Próximamente',
+            'En pausa',
+            'Finalizada'
+        ];
+    }
     
+    buscarPeliculasPorTitulo(titulo: string) {
+        if (!titulo) {
+            // Si no hay título, recargar todas las películas
+            const consulta = query(this.coleccionPeliculas);
+            collectionData(consulta, {idField: 'ID_PEL'}).subscribe((listadoPelicula) => {
+                this.listadopeliculas = [];
+                listadoPelicula.forEach((peli) => {
+                    const peliculaObj = new pelicula();
+                    peliculaObj.llenado(peli);
+                    this.listadopeliculas.push(peliculaObj);
+                });
+                this.cdr.detectChanges();
+            });
+            return;
+        }
+
+        const consulta = query(
+            this.coleccionPeliculas,
+            where('titulo', '>=', titulo),
+            where('titulo', '<=', titulo + '\uf8ff') // Para buscar títulos que comiencen con el texto ingresado
+        );
+        collectionData(consulta, {idField: 'ID_PEL'}).subscribe((listadoPelicula) => {
+            this.listadopeliculas = [];
+            listadoPelicula.forEach((peli) => {
+                const peliculaObj = new pelicula();
+                peliculaObj.llenado(peli);
+                this.listadopeliculas.push(peliculaObj);
+            });
+            this.cdr.detectChanges();
+        }, error => {
+            console.error("Error al buscar películas por título:", error);
+        });
+    }
 
 }
 

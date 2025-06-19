@@ -21,13 +21,13 @@
 
 /* Clases para colorear las filas según el estatus */
 .aprobada {
-    background-color: green !important; /* verde, mismo color que bg-success de Bootstrap */
-    color: rgb(0, 0, 0) !important;
+    background-color: #198754 !important; /* verde, mismo color que bg-success de Bootstrap */
+    color: rgb(12, 12, 12) !important;
 }
 
-.rechazada {
+.desaprobada {
     background-color: #dc3545 !important; /* rojo, mismo color que bg-danger de Bootstrap */
-    color: rgb(0, 0, 0) !important;
+    color: white !important;
 }
 
 /* Estilos más específicos para sobreescribir Bootstrap */
@@ -43,7 +43,7 @@ table.table tbody tr.rechazada {
 
 /* Asegurarse que los textos dentro de las celdas también tengan el color correcto */
 table.table tbody tr.aprobada td {
-    color: black !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 table.table tbody tr.rechazada td {
@@ -144,4 +144,46 @@ tr.rojo td {
 /* Para debug - bordes para visualizar la estructura */
 table, th, td {
     border: 1px solid #ddd;
+}
+
+.table-succes{
+    background-color: green !important;
+    color: black !important;
+}
+
+
+/* Estilos para la sección de filtros */
+.card-header.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+.card.border-primary {
+    border-color: #0d6efd !important;
+}
+
+/* Efecto hover para botones */
+.btn-primary:hover, 
+.btn-outline-secondary:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Animación sutil para el card de filtros */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+
+.aprobada td{
+    background-color: rgb(0, 255, 162) !important;
+    color: black !important;
+
+}
+
+.desaprobada td{
+    background-color: #ff6978 !important;
+    color: rgb(0, 0, 0) !important;
 }
