@@ -1,0 +1,76 @@
+<nav class="navbar" *ngIf="showNavbar">
+  <div class="navbar-container">
+    <!-- Logo y título -->
+    <div class="navbar-brand" (click)="navigateTo('/')">>
+      <img src="assets/logo.png" alt="Logo" class="navbar-logo" *ngIf="false">
+      <span class="navbar-title">Practicas Web</span>
+    </div>
+
+    <!-- Menú desktop -->
+    <div class="navbar-menu" [class.is-active]="isMenuOpen">
+      <div class="navbar-nav">
+        <a class="navbar-item" (click)="navigateTo('/')">
+          <i class="fas fa-home"></i>
+          <span>Inicio</span>
+        </a>
+        <a class="navbar-item" (click)="navigateTo('/Examen')">
+          <i class="fas fa-database"></i>
+          <span>Gestión</span>
+        </a>
+        <a class="navbar-item" (click)="navigateTo('/formulario')">
+          <i class="fas fa-tasks"></i>
+          <span>Ejercicios</span>
+        </a>
+        <a class="navbar-item" (click)="navigateTo('/about')">
+          <i class="fas fa-info-circle"></i>
+          <span>Acerca de</span>
+        </a>
+      </div>
+
+      <!-- Área del usuario -->
+      <div class="navbar-user" *ngIf="isUserLoggedIn">
+        <div class="user-dropdown">
+          <button class="user-button" (click)="onProfileClick()">
+            <div class="user-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <span class="user-name">{{ userName }}</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="onProfileClick()">
+              <i class="fas fa-user-circle"></i>
+              Perfil
+            </a>
+            <a class="dropdown-item" (click)="navigateTo('/settings')">
+              <i class="fas fa-cog"></i>
+              Configuración
+            </a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item logout" (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i>
+              Cerrar Sesión
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de login si no está autenticado -->
+      <div class="navbar-auth" *ngIf="!isUserLoggedIn">
+        <button class="btn-login" (click)="navigateTo('/login')">
+          <i class="fas fa-sign-in-alt"></i>
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+
+    <!-- Botón hamburguesa para móvil -->
+    <div class="navbar-burger" 
+         [class.is-active]="isMenuOpen" 
+         (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>

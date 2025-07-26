@@ -1,0 +1,15 @@
+.main-content {
+  margin-top: 70px; /* Altura del navbar */
+  min-height: calc(100vh - 70px);
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Responsive para móvil */
+@media (max-width: 480px) {
+  .main-content {
+    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+    padding: 15px;
+  }
+}

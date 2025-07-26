@@ -1,0 +1,60 @@
+
+  
+  <!--   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+
+    <div id="Hoja">
+        <div id="Incio">
+        </div>
+        <div id="Guion">
+          <div id="Cedula">
+            <img id="Hacienda" src="/Hacienda.png" alt="Hacienda">
+            <img id="SAT" src="/Logo_del_SAT.svg" alt="SAT">
+            <img id="QR" src="/QR.png" alt="QR">
+            <h5></h5>
+            <h5>Registro Federal de Contribuyente</h5>
+            <h5>Miguel Angel Feria Padilla</h5>
+            <h5>Nombre,denominacion o razon social</h5>
+            <h5>idCIF:</h5>
+            <h5>VALIDA TU INFORMACION FISCAL</h5>
+          </div>
+          <h4>CONSTANCIA DE SITUACION FISCAL</h4>
+          <h4>Lugar y Fecha de Emisión</h4>
+          <h4>ALTAMIRA,TAMAULIPAS A 14 DE FEBRERO DE 2025</h4>
+          <img id="Codigo" src="/Codigo de barras.png" alt="codigo de barras">
+        </div>
+        <div id="Datos">
+           <div id="Contribuyente">
+                <h3>Datos del Contribuyente</h3>
+           </div> 
+           <h4 class="info">RFC</h4>
+           <h4 class="res"></h4>
+           <h4 class="info">CURP</h4>
+           <h4 class="res"></h4>
+           <h4 class="info">Nombre(s)</h4>
+           <h4 class="res">Miguel Angel</h4>
+           <h4 class="info">Primer Apellido</h4>
+           <h4 class="res">Feria</h4>
+           <h4 class="info">Segundo Apellido</h4>
+           <h4 class="res">Padilla</h4>
+           <h4 class="info">Fecha inicio de operaciones</h4>
+           <h4 class="res">14 de Febrero del 2025</h4>
+           <h4 class="info">Estatus en el padron</h4>
+           <h4 class="res">Activo</h4>
+           <h4 class="info">Fecha de ultiomo cambio de estado</h4>
+           <h4 class="res">14 de Febrero del 2025</h4>
+           <h4 class="info">Nombre Comercial</h4>
+           <h4></h4>
+        </div>
+    </div>
+
+    <!-- Botón de impresión - se oculta al imprimir -->
+<div class="print-controls no-print">
+  <button class="btn-print" (click)="imprimirReporte()">
+    <i class="fas fa-print"></i>
+    Imprimir Reporte
+  </button>
+ <!--  <button class="btn-download" (click)="descargarPDF()">
+    <i class="fas fa-file-pdf"></i>
+    Descargar PDF
+  </button> -->
+</div>

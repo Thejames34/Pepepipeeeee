@@ -1,0 +1,124 @@
+
+<!--Botón Para Abrir modal Para Agregar Aspirantes-->
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrirModal()" >
+    Abrir Forma de Aspirante
+</button>
+
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            
+            <th>Nombre</th>
+            <th>Apellidos</th>
+             <th>Estatus</th>
+            <th>Fecha de Aplicacion</th>
+            <th>Municipio</th>
+            <th>Edad</th>
+            <th>Puesto</th>
+             <th>Experiencia</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+          <tr *ngFor="let Aspirante of listaAspirantes; let i = index"
+            [ngClass]="{
+                'Entrevista': Aspirante.ESTATUS_ASP === 'Entrevista',
+                'Contratado': Aspirante.ESTATUS_ASP === 'Contratado',
+                'Pendiente': Aspirante.ESTATUS_ASP === 'Pendiente',
+                'EnProceso': Aspirante.ESTATUS_ASP === 'En Proceso'
+            }"
+            [attr.data-estatus]="Aspirante.ESTATUS_ASP">
+            <td>{{ Aspirante.NOMBRE_ASP }}</td>
+            <td>{{ Aspirante.APELLIDOS_ASP }}</td>
+            <td><strong>{{ Aspirante.ESTATUS_ASP }}</strong></td> 
+            <td>{{ Aspirante.FECHAAPLICACION_ASP }}</td>
+            <td>{{ Aspirante.MUNICIPIO_ASP }}</td>
+            <td>{{ Aspirante.EDAD_ASP}}</td>
+            <td>{{ Aspirante.PUESTO_ASP}}</td>
+            <td>{{ Aspirante.EXPERIENCIA_ASP }}</td>
+            <td>
+                <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrirEditarAspirante(Aspirante)">
+                    <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="eliminarAspirante(Aspirante)">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="datos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Formulario para Aspirantes</h1>
+                <button class="btn-close" id="cerrarModal" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body row">
+                <label class="col-form-label col-2">Nombre</label>
+                <div class="col-10">
+                    <input type="text" class="form-control" placeholder="Juan" [(ngModel)]="aspiranteModal.NOMBRE_ASP">
+                </div>
+                <label class="col-form-label col-2">Apellidos</label>
+                <div class="col-2">
+                    <input type="test" class="form-control" placeholder="Peréz" [(ngModel)]="aspiranteModal.APELLIDOS_ASP">
+                </div>
+                <label class="col-form-label col-2">Edad</label>
+                <div class="col-2">
+                    <input type="number" class="form-control" placeholder="22" [(ngModel)]="aspiranteModal.EDAD_ASP">
+                </div>
+
+              
+
+                <label class="col-form-label col-2">Estatus</label>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="aspiranteModal.ESTATUS_ASP" [disabled]="!aspiranteModal.EDICION_ASP" >
+                        <option value="Pendiente" selected>Pendiente</option>
+                        <option value="Entrevista">Entrevista</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Contratado">Contratado</option>
+                    </select>
+                </div>
+                    <label class="col-form-label col-2">Fecha</label>
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" placeholder="Empleado" [(ngModel)]="aspiranteModal.FECHAAPLICACION_ASP">
+                    </div>
+                </div>
+                <label class="col-form-label col-2">Municipio</label>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="aspiranteModal.MUNICIPIO_ASP">
+                        <option value="Tampico">Tampico</option>
+                        <option value="Madero">Madero</option>
+                        <option value="Altamirancho">Altamirancho</option>
+        
+                    </select>
+                </div>
+          
+                <label class="col-form-label col-2">Puesto</label>
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Empleado" [(ngModel)]="aspiranteModal.PUESTO_ASP">
+                       </div>
+                    </div>
+            
+                <label class="col-form-label col-5">Experiencia</label>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Escribe Tus Experiencias" id="floatingTextarea" [(ngModel)]="aspiranteModal.EXPERIENCIA_ASP"></textarea>
+                    <label for="floatingTextarea">Escribe una descripcion aqui</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!aspiranteModal.EDICION_ASP" class="btn btn-success" (click)="registrarAspirante()">
+                    Registrar Aspirante
+                </button>
+                <button *ngIf="aspiranteModal.EDICION_ASP" class="btn btn-warning" (click)="editarAspirante()"> 
+                    Guardar Cambios de Aspirante
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

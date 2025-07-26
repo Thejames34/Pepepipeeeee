@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from "@angular/core";
 import { pelicula } from "src/app/estructuras/general";
 import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc } from "@angular/fire/firestore";
 import Swal from 'sweetalert2'
+import { usuario } from "src/app/estructuras/usuario";
 
 
 @Component({
@@ -240,6 +241,8 @@ export class EjDosComponent {
             console.error("Error al buscar películas por título:", error);
         });
     }
+
+    getterUser: usuario = new usuario();
 
 }
 

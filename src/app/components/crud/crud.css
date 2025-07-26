@@ -1,0 +1,15 @@
+.Contratado td{
+    background-color: rgb(105, 209, 157);
+}
+
+.Entrevista td{
+    background-color: rgb(143, 190, 217);
+}
+
+.Pendiente td{
+    background-color: grey;
+}
+
+.EnProceso td{
+    background-color: burlywood;
+}
